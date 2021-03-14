@@ -24,19 +24,6 @@ You have to have already installed the first Masternode and then, create a new s
 <code>sudo wget https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/fdr-multi-install.sh && bash fdr-multi-install.sh</code>
 
 
-<b>-To Update your masternode to 2.1.4 : </b>
-
-<b>-It's a mandatory Update </b>
-
-
-Run as root :
-
-<code>wget https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/update-2-2-2-1.sh && bash update-2-2-2-1.sh</code>
-
-if you have multi masternode on the same vps, run in each users : 
-
-<code>wget https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/update-multi-2-2-2.sh && bash update-multi-2-2-2.sh</code>
-
 
 To support me : 
 
