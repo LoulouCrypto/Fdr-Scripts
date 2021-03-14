@@ -21,6 +21,8 @@ rm snapshot*
 systemctl start FDReserve
 echo -e "Lunching Node" 
 sleep 30
+cd
+sleep 1
 fdreserve-cli getblockcount
 sleep 1
 fdreserve-cli getmasternodestatus
