@@ -11,11 +11,11 @@ sleep 1
 rm snapshot*
 sleep 1
 echo -e "Downloading SnapShot" 
-wget https://fdreserve.com/downloads/snapshot-test.zip
+wget https://fdreserve.com/downloads/snapshot.zip
 sleep 1
 rm -r blocks chainstate db.log debug.log fee_estimates.dat mncache.dat peers.dat 
 sleep 1
-unzip snapshot-test.zip
+unzip snapshot.zip
 sleep 2 
 rm snapshot*
 systemctl start FDReserve
