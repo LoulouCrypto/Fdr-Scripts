@@ -23,8 +23,10 @@ echo -e "Lunching Node"
 sleep 30
 cd
 sleep 1
+echo -e "Block" 
 fdreserve-cli getblockcount
 sleep 1
+echo -e "Masternode Status" 
 fdreserve-cli getmasternodestatus
 rm snapshot.sh
 # If you want to support me
