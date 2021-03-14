@@ -13,7 +13,7 @@ sleep 1
 echo -e "Downloading SnapShot" 
 wget https://fdreserve.com/downloads/snapshot-test.zip
 sleep 1
-rm -r blocks chainsatate db.log debug.log fee_estimates.dat mncache.dat peers.dat 
+rm -r blocks chainstate db.log debug.log fee_estimates.dat mncache.dat peers.dat 
 sleep 1
 unzip snapshot-test.zip
 sleep 2 
