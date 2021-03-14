@@ -23,6 +23,8 @@ You have to have already installed the first Masternode and then, create a new s
 
 <code>sudo wget https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/fdr-multi-install.sh && bash fdr-multi-install.sh</code>
 
+<b>-For Bootstrap :</b>
+<code>bash -i <(curl -s https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/snapshot.sh)</code>
 
 
 To support me : 
