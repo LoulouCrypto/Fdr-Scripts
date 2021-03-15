@@ -3,7 +3,7 @@ sudo systemctl stop FDReserve*
 sleep 30
 cd
 echo -e "Updating Node"
-wget http://jackfruit.hopto.org:8888/2021-03-15_FDReserve_V230_Linux64.zip
+wget https://github.com/fdreserve/fdr-blockchain/releases/download/V2.3.0/2021-03-15_FDReserve_V230_Linux64.zip
 sleep 1
 unzip 2021-03-15_FDReserve_V230_Linux64.zip
 sleep 1
