@@ -27,7 +27,7 @@ sleep 2
 rm snapshot.zip
 sleep 2
 cd
-rm up-beta.sh
+rm update.sh
 echo -e "Starting Node"
 sudo systemctl start FDReserve
 sleep 30
