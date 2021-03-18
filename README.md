@@ -18,11 +18,6 @@ You must be logged as root user and use this : </b>
 
 <code>wget https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/fdr-mn-compile.sh && bash fdr-mn-compile.sh</code>
 
-<b>-For Multi-Masternode install: 
-You have to have already installed the first Masternode and then, create a new sudo user and run : </b>
-
-<code>sudo wget https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/fdr-multi-install.sh && bash fdr-multi-install.sh</code>
-
 <b>-For Bootstrap :</b>
 <code>bash -i <(curl -s https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/snapshot.sh)</code>
 
