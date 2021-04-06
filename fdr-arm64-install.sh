@@ -306,7 +306,7 @@ function prepare_system_for_download() {
 echo -e "Prepare the system to install ${GREEN}$COIN_NAME${NC} master node."
 apt-get update 
 echo -e "Installing required packages, it may take some time to finish.${NC}"
-apt-get install -y unzip curl systemd
+apt-get install -y unzip curl systemd net-tools figlet
 if [ "$?" -gt "0" ];
   then
     echo -e "${RED}Not all required packages were installed properly. Try to install them manually by running the following commands:${NC}\n"
