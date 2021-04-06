@@ -58,7 +58,7 @@ function download_node() {
   clear
 }
 
-function compile_node() {
+function download_node() {
 figlet -f slant "FDReserve"
   echo -e "Prepare to download $COIN_NAME"
   TMP_FOLDER=$(mktemp -d)
