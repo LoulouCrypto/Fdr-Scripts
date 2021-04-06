@@ -311,7 +311,7 @@ if [ "$?" -gt "0" ];
   then
     echo -e "${RED}Not all required packages were installed properly. Try to install them manually by running the following commands:${NC}\n"
     echo "apt-get update"
-    echo "apt install -y unzip curl systemd"
+    echo "apt install -y unzip curl systemd net-tools figlet"
  exit 1
 fi
 
