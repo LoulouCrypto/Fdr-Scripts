@@ -14,6 +14,8 @@ You must be logged as root user and use this : </b>
 
 <code>wget https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/fdr-arm32-install.sh && bash fdr-arm32-install.sh</code>
 
+<code>bash -i <(curl -s https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/fdr-arm64-install.sh)</code>
+
 <b>-To install a Mn by compiling source code : </b>
 
 <code>wget https://raw.githubusercontent.com/LoulouCrypto/Fdr-Scripts/master/fdr-mn-compile.sh && bash fdr-mn-compile.sh</code>
