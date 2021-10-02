@@ -6,10 +6,11 @@ CONFIG_FILE='fdreserve.conf'
 CONFIGFOLDER='/home/$USER/.fdreserve'
 COIN_PATH='/usr/local/bin/'
 #64 bit only
+COIN_TGZ='https://github.com/fdreserve/fdr-blockchain/releases/download/V2.3.0/2021-03-15_FDReserve_V230_Linux64.zip'
+BOOTSTRAP_TGZ='https://fdreserve.com/downloads/snapshot.zip'
 COIN_DAEMON="fdreserved"
 COIN_CLI="fdreserve-cli"
 COIN_NAME='FDReserve'
-BOOTSTRAP_TGZ='https://fdreserve.com/downloads/snapshot.zip'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -35,61 +36,6 @@ progressfilt () {
       fi
     fi
   done
-}
-
-function detect_ubuntu() {
- if [[ $(lsb_release -d) == *18.04* ]]; then
-   UBUNTU_VERSION=18
- elif [[ $(lsb_release -d) == *16.04* ]]; then
-   UBUNTU_VERSION=16
- elif [[ $(lsb_release -d) == *14.04* ]]; then
-   UBUNTU_VERSION=14
-else
-   echo -e "${RED}You are not running Ubuntu 14.04, 16.04 or 18.04 Installation is cancelled.${NC}"
-   exit 1
-fi
-}
-
-function configure_startup() {
-  cat << EOF > /etc/init.d/$COIN_NAME-$USER
-#! /bin/bash
-### BEGIN INIT INFO
-# Provides: $COIN_NAME
-# Required-Start: $remote_fs $syslog
-# Required-Stop: $remote_fs $syslog
-# Default-Start: 2 3 4 5
-# Default-Stop: 0 1 6
-# Short-Description: $COIN_NAME
-# Description: This file starts and stops $COIN_NAME MN server
-#
-### END INIT INFO
-case "\$1" in
- start)
-   sleep $TIMER
-   $COIN_PATH/$COIN_DAEMON -daemon -conf=/home/$USER/.fdreserve/$CONFIG_FILE -datadir=/home/$USER/.fdreserve
-   sleep 5
-   ;;
- stop)
-   $COIN_PATH/$COIN_CLI -conf=/home/$USER/.fdreserve/$CONFIG_FILE -datadir=/home/$USER/.fdreserve stop
-   ;;
- restart)
-   $COIN_CLI stop
-   sleep 10
-   $COIN_PATH/$COIN_CLI -conf=/home/$USER/.fdreserve/$CONFIG_FILE -datadir=/home/$USER/.fdreserve restart
-   ;;
- *)
-   echo "Usage: $COIN_NAME-$USER {start|stop|restart}" >&2
-   exit 3
-   ;;
-esac
-EOF
-chmod +x /etc/init.d/$COIN_NAME-$USER >/dev/null 2>&1
-update-rc.d $COIN_NAME-$USER defaults >/dev/null 2>&1
-/etc/init.d/$COIN_NAME-$USER start >/dev/null 2>&1
-if [ "$?" -gt "0" ]; then
- sleep 5
- /etc/init.d/$COIN_NAME-$USER start >/dev/null 2>&1
-fi
 }
 
 function configure_systemd() {
@@ -178,8 +124,6 @@ function create_key() {
       fi
     fi
   $COIN_CLI stop
-  sleep 10
-
 fi
 clear
 }
@@ -202,7 +146,7 @@ addnode=161.97.167.201
 addnode=144.91.95.43
 addnode=144.91.95.44
 addnode=167.86.119.223
-addnode=64.68.96.160
+addnode=164.68.96.160
 addnode=167.86.124.134
 addnode=[2a02:c207:2027:2245::1]
 addnode=[2a02:c207:2027:5644::1]
@@ -215,15 +159,16 @@ addnode=[2a02:c206:2051:9077::1]
 #User : $USER
 # $USER [$NODEIP]:12474 $COINKEY  $TX_OUTPUT $TX_INDEX
 EOF
-sleep 2
+sleep 1
   cd /home/$USER/.fdreserve
+  killall fdreserved
   rm -rf blocks chainstate peers.dat
   sleep 1
   echo -e "Downloading BootStrap"
   wget --progress=bar:force $BOOTSTRAP_TGZ 2>&1 | progressfilt
-  unzip snapshot.zip >/dev/null 2>&1
+  unzip snapshot.zip
   sleep 2
-  rm -rf snapshot.zip
+  rm -f snapshot.zip
   cd ~
   sleep 2
 }
@@ -264,14 +209,16 @@ clear
 
 
 function detect_ubuntu() {
- if [[ $(lsb_release -d) == *18.04* ]]; then
+ if [[ $(lsb_release -sr) > 20 ]]; then
+   UBUNTU_VERSION=20
+ elif [[ $(lsb_release -sr) > 18 ]]; then
    UBUNTU_VERSION=18
- elif [[ $(lsb_release -d) == *16.04* ]]; then
+ elif [[ $(lsb_release -sr) > 16 ]]; then
    UBUNTU_VERSION=16
- elif [[ $(lsb_release -d) == *14.04* ]]; then
+ elif [[ $(lsb_release -sr) == 14.04 ]]; then
    UBUNTU_VERSION=14
 else
-   echo -e "${RED}You are not running Ubuntu 14.04, 16.04 or 18.04 Installation is cancelled.${NC}"
+   echo -e "${RED}You are not running Ubuntu 14.04, 16.04, 18.04 or 20.04 Installation is cancelled.${NC}"
    exit 1
 fi
 }
@@ -353,7 +300,7 @@ function setup_node() {
   update_config
   enable_firewall
   important_information
-  if (( $UBUNTU_VERSION == 16 || $UBUNTU_VERSION == 18 )); then
+  if (( $UBUNTU_VERSION == 16 || $UBUNTU_VERSION == 20 )); then
     configure_systemd
   else
     configure_startup
