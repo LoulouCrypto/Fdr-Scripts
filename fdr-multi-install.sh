@@ -7,7 +7,7 @@ CONFIGFOLDER='/home/$USER/.fdreserve'
 COIN_PATH='/usr/local/bin/'
 #64 bit only
 COIN_TGZ='https://github.com/fdreserve/fdr-blockchain/releases/download/V2.3.0/2021-03-15_FDReserve_V230_Linux64.zip'
-BOOTSTRAP_TGZ='https://fdreserve.com/downloads/snapshot.zip'
+BOOTSTRAP_TGZ='https://downloads.fdreserve.com/bootstraps/fdr/snapshot.zip'
 COIN_DAEMON="fdreserved"
 COIN_CLI="fdreserve-cli"
 COIN_NAME='FDReserve'
@@ -312,7 +312,6 @@ function setup_node() {
 clear
 cd ~/
 detect_ubuntu
-create_swap
 prepare_system_for_download
 setup_node
 cd ~/
